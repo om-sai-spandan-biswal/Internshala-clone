@@ -1,0 +1,46 @@
+<%- include('partials/header') %>
+
+<main class="profile-form-container">
+  <form class="profile-form" action="/editProfile" method="POST" enctype="multipart/form-data">
+    <h2>Edit Profile</h2>
+
+    <% if (user.role === 'jobseeker') { %>
+      <label>Full Name</label>
+      <input type="text" name="name" value="<%= user.name %>" required>
+
+      <label>Change Profile Photo</label>
+      <input type="file" name="photo" accept="image/*">
+
+      <label>Bio</label>
+      <textarea name="bio" rows="3"><%= user.bio %></textarea>
+
+      <label>Education</label>
+      <input type="text" name="education" value="<%= user.education %>">
+
+      <label>Skills/Technologies</label>
+      <input type="text" name="skills" value="<%= user.skills %>">
+
+      <label>Update Resume (PDF)</label>
+      <input type="file" name="resume" accept=".pdf">
+    <% } else if (user.role === 'recruiter') { %>
+      <label>Company Name</label>
+      <input type="text" name="companyName" value="<%= user.companyName %>" required>
+
+      <label>Change Company Logo</label>
+      <input type="file" name="logo" accept="image/*">
+
+      <label>About Company</label>
+      <textarea name="bio" rows="3"><%= user.bio %></textarea>
+
+      <label>Website</label>
+      <input type="url" name="website" value="<%= user.website %>">
+
+      <label>Hiring Domains</label>
+      <input type="text" name="domains" value="<%= user.domains %>">
+    <% } %>
+
+    <button type="submit" class="btn">Save Changes</button>
+  </form>
+</main>
+
+<%- include('partials/footer') %>

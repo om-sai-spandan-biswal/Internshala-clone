@@ -1,0 +1,30 @@
+<%- include('partials/header') %>
+
+<section class="landing">
+  <div class="landing-content">
+    <h1>Find Your Dream Internship or Hire Top Talent</h1>
+    <p>Your career journey starts here. Jobify connects jobseekers and recruiters with ease.</p>
+    <% if (!user) { %>
+      <a href="/signup" class="btn-primary">Get Started</a>
+    <% } else { %>
+      <a href="/dashboard" class="btn-primary">Go to Dashboard</a>
+    <% } %>
+  </div>
+</section>
+
+<section class="features">
+  <div class="feature-box">
+    <h3>For Jobseekers</h3>
+    <p>Browse internships and full-time jobs across top companies, customized for your skills.</p>
+  </div>
+  <div class="feature-box">
+    <h3>For Recruiters</h3>
+    <p>Post jobs and filter top candidates with ease. Simplified hiring process.</p>
+  </div>
+  <div class="feature-box">
+    <h3>Smart Matching</h3>
+    <p>We match candidates and companies using intelligent skill-based filtering.</p>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

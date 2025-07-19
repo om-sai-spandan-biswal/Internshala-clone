@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Job Platform</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header class="main-header">
+  <div class="container header-content">
+    <a href="/" class="logo">Jobify</a>
+
+    <nav class="navbar">
+      <% if (user) { %>
+        <% if (user.role === 'recruiter') { %>
+          <a href="/jobs/post">Post Job</a>
+        <% } %>
+        <a href="/jobs">jobs</a>
+        <div class="dropdown">
+          <button class="dropbtn">Profile ⌄</button>
+          <div class="dropdown-content">
+            <a href="/profile">View Profile</a>
+            <a href="/editProfile">Edit Profile</a>
+          </div>
+        </div>
+        <a href="/logout">Logout</a>
+      <% } else { %>
+        <a href="/login">Login</a>
+        <a href="/signup">Sign Up</a>
+      <% } %>
+    </nav>
+  </div>
+</header>
+
+

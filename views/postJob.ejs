@@ -1,0 +1,36 @@
+<%- include('partials/header') %>
+
+<div class="job-form">
+  <h2>Post a New Job</h2>
+  <form action="/jobs" method="POST">
+    <input type="text" name="title" placeholder="Job Title" required />
+    <select name="job_role" required>
+      <option value="" disabled selected>Select Job role</option>
+      <option value="fullstack">Full Stack Developer</option>
+      <option value="frontend">Frontend Developer</option>
+      <option value="backend">Backend Developer</option>
+      <option value="data science">Data Science</option>
+      <option value="mobile app">Mobile App Developer</option>
+      <option value="graphic design">Graphic Design</option>
+      <option value="content writing">Content Writing</option>
+      <option value="digital marketing">Digital Marketing</option>
+      <option value="seo">SEO Specialist</option>
+      <option value="ui/ux design">UI/UX Design</option>
+      <option value="cyber security">Cyber Security</option>
+      <option value="cloud computing">Cloud Computing</option>
+      <option value="others">Others</option>
+    </select>
+    <textarea name="description" placeholder="Job Description" required></textarea>
+    <input type="text" name="location" placeholder="Location" required />
+    <input type="number" name="salary" placeholder="Salary (INR)" />
+    <select name="job_type" required>
+      <option value="" disabled selected>Select Job Type</option>
+      <option value="full-time">Full-Time</option>
+      <option value="part-time">Part-Time</option>
+      <option value="internship">Internship</option>
+    </select>
+    <button type="submit" class="btn">Post Job</button>
+  </form>
+</div>
+
+<%- include('partials/footer') %>

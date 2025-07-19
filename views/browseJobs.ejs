@@ -1,0 +1,14 @@
+<%- include('partials/header') %>
+
+<div class="job-list">
+  <h2>Available Jobs</h2>
+  <% jobs.forEach(job => { %>
+    <div class="job-card">
+      <h3><%= job.title %> @ <%= job.company %></h3>
+      <p><%= job.location %></p>
+      <a href="/jobs/<%= job._id %>" class="btn">View</a>
+    </div>
+  <% }) %>
+</div>
+
+<%- include('partials/footer') %>

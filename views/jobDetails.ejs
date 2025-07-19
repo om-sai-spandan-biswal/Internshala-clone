@@ -1,0 +1,11 @@
+<%- include('partials/header') %>
+
+<div class="job-details">
+  <h2><%= job.title %> @ <%= job.company %></h2>
+  <p><strong>Location:</strong> <%= job.location %></p>
+  <p><strong>Salary:</strong> ₹<%= job.salary %></p>
+  <p><%= job.description %></p>
+  <a href="/apply/<%= job._id %>" class="btn">Apply Now</a>
+</div>
+
+<%- include('partials/footer') %>

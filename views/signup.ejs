@@ -1,0 +1,17 @@
+<%- include('partials/header') %>
+
+<div class="auth-form">
+  <h2>Create an Account</h2>
+  <form action="/signup" method="POST">
+    <input type="text" name="name" placeholder="Full Name" required />
+    <input type="email" name="email" placeholder="Email" required />
+    <input type="password" name="password" placeholder="Password" required />
+    <select name="role">
+      <option value="jobseeker">Job Seeker</option>
+      <option value="recruiter">Recruiter</option>
+    </select>
+    <button type="submit" class="btn">Signup</button>
+  </form>
+</div>
+
+<%- include('partials/footer') %>

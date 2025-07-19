@@ -1,0 +1,40 @@
+<%- include('partials/header') %>
+
+<div class="dashboard-container">
+  <div class="dashboard-card">
+    <h2>Welcome, <%= user.name %></h2>
+    <p class="dashboard-role">Logged in as <strong><%= user.role %></strong></p>
+
+    <% if (user.role === 'jobseeker') { %>
+      <div class="dashboard-section">
+        <h3>Your Profile</h3>
+        <ul class="dashboard-links">
+          <li><a href="/profile/view">View Profile</a></li>
+          <li><a href="/profile/edit">Edit Profile</a></li>
+          <li><a href="/applications">My Applications</a></li>
+        </ul>
+      </div>
+      <div class="dashboard-section">
+        <h3>Browse Opportunities</h3>
+        <a href="/jobs" class="btn">Find Jobs</a>
+      </div>
+    <% } else if (user.role === 'recruiter') { %>
+      <div class="dashboard-section">
+        <h3>Your Company Profile</h3>
+        <ul class="dashboard-links">
+          <li><a href="/profile/view">View Company Info</a></li>
+          <li><a href="/profile/edit">Edit Company Info</a></li>
+        </ul>
+      </div>
+      <div class="dashboard-section">
+        <h3>Job Postings</h3>
+        <ul class="dashboard-links">
+          <li><a href="/post-job">Post New Job</a></li>
+          <li><a href="/jobs/manage">Manage Your Jobs</a></li>
+        </ul>
+      </div>
+    <% } %>
+  </div>
+</div>
+
+<%- include('partials/footer') %>
