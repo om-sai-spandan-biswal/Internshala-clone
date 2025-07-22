@@ -552,3 +552,13 @@ input,textarea {
 .dashboard-links a:hover {
   text-decoration: underline;
 }
+
+.logout-btn {
+  display: inline-block;
+  margin-left: 1rem;
+  padding: 10px 15px;
+  background: #ff4d4d;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+}

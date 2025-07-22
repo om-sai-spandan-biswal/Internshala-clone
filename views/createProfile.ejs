@@ -1,7 +1,7 @@
 <%- include('partials/header') %>
 
 <main class="profile-form-container">
-  <form class="profile-form" action="/createProfile" method="POST" enctype="multipart/form-data">
+  <form class="profile-form" action="/profile/create" method="POST" >
     <h2>Create Profile</h2>
 
     <% if (user.role === 'jobseeker') { %>
@@ -9,7 +9,7 @@
       <input type="text" name="name" value="<%= user.name %>" required>
 
       <label>Profile Photo</label>
-      <input type="file" name="photo" accept="image/*">
+      <input type="file" name="image" accept="image/*">
 
       <label>Bio</label>
       <textarea name="bio" rows="3" placeholder="Write something about yourself..."></textarea>
@@ -27,7 +27,7 @@
       <input type="text" name="companyName" required>
 
       <label>Company Logo</label>
-      <input type="file" name="logo" accept="image/*">
+      <input type="file" name="image" accept="image/*">
 
       <label>About Company</label>
       <textarea name="bio" rows="3" placeholder="Brief about your company"></textarea>

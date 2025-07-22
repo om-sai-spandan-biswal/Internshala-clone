@@ -1,20 +1,24 @@
 const express = require("express");
 const app = express();
 const path = require("path");
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 const mongoose = require("mongoose");
-
+const authRoure = require("./routes/auth");
+const profileRute = require("./routes/profile");
+const verifyLogin = require("./utils/userSignHandel");
+const cookieParser = require("cookie-parser");
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
+app.use(express.urlencoded({ extended: true }));  
+app.use(express.json());
+app.use(cookieParser());
 
-const user = {
-  name: "Shri Bihari ji",
-  email: "vrindavan@email.com",
-  role: "jobseeker", //jobseeker recruiter
-};
+app.use(verifyLogin,(req, res, next) => {
+  res.locals.user = req.user || null;
+  next();
+});
 
-//  const user = null ;
 
 const jobs = [
   {
@@ -109,35 +113,34 @@ const jobs = [
 ];
 
 app.get("/", (req, res) => {
-  res.render("index.ejs", { user });
+  res.render("index.ejs", { user : res.locals.user });
 });
 
+app.use("/", authRoure);
+app.use("/profile", profileRute) ;
+
+
+
 app.get("/jobs", (req, res) => {
-  res.render("browseJobs.ejs", { user, jobs });
+  res.render("browseJobs.ejs", { user : res.locals.user, jobs });
 });
 
 app.get("/jobs/post", (req, res) => {
-  res.render("postJob.ejs", { user });
+  res.render("postJob.ejs", { user : res.locals.user });
 });
 
 app.get("/jobs/:id", (req, res) => {
   const id = req.params.id;
   const job = jobs.find((job) => job._id === id);
-  res.render("jobDetails.ejs", { user, job });
+  res.render("jobDetails.ejs", { user : res.locals.user, job });
 });
 
 app.get("/dashboard", (req, res) => {
-  res.render("dashboard.ejs", { user });
+  res.render("dashboard.ejs", { user : res.locals.user});
 });
 
 
-app.get("/profile/create", (req, res) => {
-  res.render("createProfile.ejs", { user });
-});
 
-app.get("/profile/edit", (req, res) => {
-  res.render("editProfile.ejs", { user });
-});
 
 app.listen(PORT, () => {
   mongoose

@@ -5,22 +5,21 @@
     <h2>My Profile</h2>
 
     <% if (user.role === 'jobseeker') { %>
-      <img src="<%= user.photo || '/images/default-profile.png' %>" class="profile-photo" alt="Profile Photo">
+      <img src="<%= user.image || '/images/default-profile.png' %>" class="profile-photo" alt="Profile Photo">
       <p><strong>Name:</strong> <%= user.name %></p>
       <p><strong>Email:</strong> <%= user.email %></p>
       <p><strong>Bio:</strong> <%= user.bio || 'N/A' %></p>
       <p><strong>Education:</strong> <%= user.education || 'N/A' %></p>
       <p><strong>Technologies:</strong> <%= user.skills || 'N/A' %></p>
       <p><strong>Resume:</strong> 
-        <% if (user.resumeUrl) { %>
-          <a href="<%= user.resumeUrl %>" target="_blank">View Resume</a>
+        <% if (user.resume) { %>
+          <a href="<%= user.resume %>" target="_blank">View Resume</a>
         <% } else { %>
           Not Uploaded
         <% } %>
       </p>
     <% } else if (user.role === 'recruiter') { %>
-      <img src="<%= user.logo || '/images/default-company.png' %>" class="profile-photo" alt="Company Logo">
-      <p><strong>Name:</strong> <%= user.name %></p>
+      <img src="<%= user.images || '/images/default-company.png' %>" class="profile-photo" alt="Company Logo">
       <p><strong>Email:</strong> <%= user.email %></p>
       <p><strong>Company:</strong> <%= user.companyName || 'N/A' %></p>
       <p><strong>Website:</strong> 
