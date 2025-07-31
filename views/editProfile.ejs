@@ -1,7 +1,7 @@
 <%- include('partials/header') %>
 
 <main class="profile-form-container">
-  <form class="profile-form" action="/editProfile" method="POST" enctype="multipart/form-data">
+  <form class="profile-form" action="/profile/edit/<%= user.profile["_id"] %>?_method=PUT" method="post">
     <h2>Edit Profile</h2>
 
     <% if (user.role === 'jobseeker') { %>
@@ -12,31 +12,31 @@
       <input type="file" name="photo" accept="image/*">
 
       <label>Bio</label>
-      <textarea name="bio" rows="3"><%= user.bio %></textarea>
+      <textarea name="bio" rows="3"><%= user.profile.bio %></textarea>
 
       <label>Education</label>
-      <input type="text" name="education" value="<%= user.education %>">
+      <input type="text" name="education" value="<%= user.profile.education %>">
 
       <label>Skills/Technologies</label>
-      <input type="text" name="skills" value="<%= user.skills %>">
+      <input type="text" name="skills" value="<%= user.profile.skills %>">
 
       <label>Update Resume (PDF)</label>
       <input type="file" name="resume" accept=".pdf">
     <% } else if (user.role === 'recruiter') { %>
       <label>Company Name</label>
-      <input type="text" name="companyName" value="<%= user.companyName %>" required>
+      <input type="text" name="companyName" value="<%= user.profile.companyName %>" required>
 
       <label>Change Company Logo</label>
       <input type="file" name="logo" accept="image/*">
 
       <label>About Company</label>
-      <textarea name="bio" rows="3"><%= user.bio %></textarea>
+      <textarea name="bio" rows="3"><%= user.profile.bio %></textarea>
 
       <label>Website</label>
-      <input type="url" name="website" value="<%= user.website %>">
+      <input type="url" name="website" value="<%= user.profile.website %>">
 
       <label>Hiring Domains</label>
-      <input type="text" name="domains" value="<%= user.domains %>">
+      <input type="text" name="domains" value="<%= user.profile.domain %>">
     <% } %>
 
     <button type="submit" class="btn">Save Changes</button>

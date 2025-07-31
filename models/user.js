@@ -23,7 +23,8 @@ const userSchema = new Schema({
     },
     profile : {
         type : Schema.Types.ObjectId ,
-        ref : "Profile"
+        ref : "Profile",
+        unique : true
     },
     createdAt : {
         type : Date,

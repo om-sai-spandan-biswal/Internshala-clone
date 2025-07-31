@@ -12,17 +12,11 @@
 
     <nav class="navbar">
       <% if (user) { %>
+        <a href="/dashboard">dashboard</a>
         <% if (user.role === 'recruiter') { %>
           <a href="/jobs/post">Post Job</a>
         <% } %>
         <a href="/jobs">jobs</a>
-        <div class="dropdown">
-          <button class="dropbtn">Profile ⌄</button>
-          <div class="dropdown-content">
-            <a href="/profile">View Profile</a>
-            <a href="/editProfile">Edit Profile</a>
-          </div>
-        </div>
         <form class="logout-btn" action="/logout" method="post"><button>Logout</button></form>
       <% } else { %>
         <a href="/login">Login</a>

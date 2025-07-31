@@ -8,10 +8,10 @@
   <% } else { %>
     <% applications.forEach(app => { %>
       <div class="job-card">
-        <h3><%= app.jobTitle %> — <%= app.companyName %></h3>
+        <h3><%= app.job.title %> — <%= app.job.companyName %></h3>
         <p><strong>Status:</strong> <%= app.status %></p>
-        <p><strong>Applied On:</strong> <%= app.dateApplied.toDateString() %></p>
-        <a class="btn" href="/job/<%= app.jobId %>">View Job</a>
+        <p><strong>Applied On:</strong> <%= app.appliedAt.toDateString() %></p>
+        <a class="btn" href="/jobs/<%= app.job._id %>">View Job</a>
       </div>
     <% }) %>
   <% } %>

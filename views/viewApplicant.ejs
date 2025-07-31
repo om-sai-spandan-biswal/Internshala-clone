@@ -8,13 +8,10 @@
   <% } else { %>
     <% applicants.forEach(applicant => { %>
       <div class="job-card">
-        <h3><%= applicant.name %></h3>
-        <p><strong>Email:</strong> <%= applicant.email %></p>
-        <p><strong>Technologies:</strong> <%= applicant.technologies.join(", ") %></p>
-        <p><strong>Education:</strong> <%= applicant.education %></p>
-        <p><strong>Bio:</strong> <%= applicant.bio %></p>
+        <h3><%= applicant.applicant.name %></h3>
+        <p><strong>Email:</strong> <%= applicant.applicant.email %></p>
         <a class="btn" href="<%= applicant.resumeLink %>" target="_blank">View Resume</a>
-        <a class="btn secondary" href="/profile/<%= applicant._id %>">View Profile</a>
+        <a class="btn secondary" href="/profile/<%= applicant.applicant._id %>">View Profile</a>
       </div>
     <% }) %>
   <% } %>

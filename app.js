@@ -3,144 +3,42 @@ const app = express();
 const path = require("path");
 const PORT = process.env.PORT || 5000;
 const mongoose = require("mongoose");
-const authRoure = require("./routes/auth");
-const profileRute = require("./routes/profile");
+const methodOverride = require('method-override') ;
 const verifyLogin = require("./utils/userSignHandel");
+
 const cookieParser = require("cookie-parser");
+app.use(methodOverride('_method'))
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
-app.use(express.urlencoded({ extended: true }));  
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
 
-app.use(verifyLogin,(req, res, next) => {
+const authRoute = require("./routes/auth");
+const profileRoute = require("./routes/profile");
+const jobsRoute = require("./routes/jobs");
+const applyRoute = require("./routes/apply") ;
+
+app.use(verifyLogin, (req, res, next) => {
   res.locals.user = req.user || null;
   next();
 });
 
 
-const jobs = [
-  {
-    _id: "1",
-    title: "Software Engineer",
-    company: "D.E.C",
-    location: "Odisha, India",
-    description: "We need a bhakt and also a coder. For seva purpose.",
-    salary: "100,000 - 180,000",
-  },
-  {
-    _id: "2",
-    title: "Backend Developer",
-    company: "BhaktiTech",
-    location: "Varanasi, India",
-    description:
-      "Looking for a Node.js backend developer with bhakti towards Hari.",
-    salary: "120,000 - 200,000",
-  },
-  {
-    _id: "3",
-    title: "Frontend Developer",
-    company: "Hari Devs",
-    location: "Mathura, India",
-    description:
-      "React developer needed to build interfaces for Hari's leela streaming app.",
-    salary: "90,000 - 150,000",
-  },
-  {
-    _id: "4",
-    title: "DevOps Engineer",
-    company: "Shree Cloud",
-    location: "Dwarka, India",
-    description:
-      "Deploying seva microservices with docker/k8s. Bhakti mindset a must.",
-    salary: "140,000 - 210,000",
-  },
-  {
-    _id: "5",
-    title: "ML Engineer",
-    company: "VaishnavAI",
-    location: "Puri, India",
-    description:
-      "Train ML models to detect bhajan lyrics. Should love Lord Harivansh.",
-    salary: "160,000 - 250,000",
-  },
-  {
-    _id: "6",
-    title: "Full Stack Developer",
-    company: "SevaStack",
-    location: "Ayodhya, India",
-    description:
-      "Build scalable seva platforms. MERN stack and pure bhakti required.",
-    salary: "130,000 - 220,000",
-  },
-  {
-    _id: "7",
-    title: "Data Analyst",
-    company: "HariData",
-    location: "Ujjain, India",
-    description:
-      "Analyze data for devotees’ app. Bhakta with SQL & Excel skills.",
-    salary: "80,000 - 140,000",
-  },
-  {
-    _id: "8",
-    title: "Security Engineer",
-    company: "DivineSecure",
-    location: "Raman Reti, India",
-    description:
-      "Protect devotee data with penetration testing. Ethical hacker preferred.",
-    salary: "150,000 - 230,000",
-  },
-  {
-    _id: "9",
-    title: "Mobile App Developer",
-    company: "BhajanMobiles",
-    location: "Barsana, India",
-    description:
-      "React Native dev to build mobile bhajan platforms. Seva attitude a plus.",
-    salary: "100,000 - 170,000",
-  },
-  {
-    _id: "10",
-    title: "AI Researcher",
-    company: "ShriAI",
-    location: "Nathdwara, India",
-    description:
-      "Research AI to simulate Harivansh vaani. Only true bhakts apply.",
-    salary: "180,000 - 300,000",
-  },
-];
 
 app.get("/", (req, res) => {
-  res.render("index.ejs", { user : res.locals.user });
+  res.render("index.ejs", { user: res.locals.user });
 });
 
-app.use("/", authRoure);
-app.use("/profile", profileRute) ;
-
-
-
-app.get("/jobs", (req, res) => {
-  res.render("browseJobs.ejs", { user : res.locals.user, jobs });
-});
-
-app.get("/jobs/post", (req, res) => {
-  res.render("postJob.ejs", { user : res.locals.user });
-});
-
-app.get("/jobs/:id", (req, res) => {
-  const id = req.params.id;
-  const job = jobs.find((job) => job._id === id);
-  res.render("jobDetails.ejs", { user : res.locals.user, job });
-});
+app.use("/", authRoute);
+app.use("/profile", profileRoute);
+app.use("/jobs", jobsRoute);
+app.use("/apply",applyRoute) ;
 
 app.get("/dashboard", (req, res) => {
-  res.render("dashboard.ejs", { user : res.locals.user});
+  res.render("dashboard.ejs", { user: res.locals.user });
 });
-
-
-
 
 app.listen(PORT, () => {
   mongoose

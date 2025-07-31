@@ -25,10 +25,15 @@ const profileSchema = new Schema({
     skills : String ,
     education : String,
     resume : String, 
+    apply : [{
+        type : Schema.Types.ObjectId ,
+        ref : "Job"
+    }] ,
     // For recruiter -------------------->
     companyName : String ,
     website : String,
-    domain : String
+    domain : String,
+    
 })
 
 const Profile = mongoose.model("Profile",profileSchema) ;

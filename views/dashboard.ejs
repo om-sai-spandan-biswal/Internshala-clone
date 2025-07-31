@@ -9,9 +9,14 @@
       <div class="dashboard-section">
         <h3>Your Profile</h3>
         <ul class="dashboard-links">
-          <li><a href="/profile/create">View Profile</a></li>
+          <% if(user.profile) {%>
+            <li><a href="/profile">View Profile</a></li>
+          <% }else { %>
+            <li><a href="/profile/create">Create Profile</a></li>
+            <% } %>
+            
           <li><a href="/profile/edit">Edit Profile</a></li>
-          <li><a href="/applications">My Applications</a></li>
+          <li><a href="/apply/view">My Applications</a></li>
         </ul>
       </div>
       <div class="dashboard-section">
@@ -22,14 +27,18 @@
       <div class="dashboard-section">
         <h3>Your Company Profile</h3>
         <ul class="dashboard-links">
-          <li><a href="/profile/create">View Company Info</a></li>
+          <% if(user.profile) {%>
+            <li><a href="/profile">View Profile</a></li>
+          <% }else { %>
+            <li><a href="/profile/create">Create Profile</a></li>
+            <% } %>
           <li><a href="/profile/edit">Edit Company Info</a></li>
         </ul>
       </div>
       <div class="dashboard-section">
         <h3>Job Postings</h3>
         <ul class="dashboard-links">
-          <li><a href="/post-job">Post New Job</a></li>
+          <li><a href="/jobs/post">Post New Job</a></li>
           <li><a href="/jobs/manage">Manage Your Jobs</a></li>
         </ul>
       </div>
