@@ -1,0 +1,61 @@
+project: Internshala Clone
+
+status:
+  completion: 60%
+  backend_stack: [Node.js, Express, MongoDB, Mongoose]
+  frontend_stack: [EJS templating]
+  deployment: Not yet
+
+implemented_features:
+  - User registration & login (JWT-based)
+  - Role-based access (Jobseeker/Recruiter)
+  - Job creation by recruiter
+  - Job application by jobseeker
+  - View applied jobs
+  - EJS frontend with embedded logic
+  - MongoDB as primary database
+  - Basic folder structure
+
+missing_features:
+  - Email verification and password reset
+  - Resume upload (via Cloudinary or Multer)
+  - Recruiter dashboard analytics
+  - Job filtering and search
+  - Pagination on job listings
+  - Notification system (on apply, status updates)
+  - Admin dashboard (to manage users, jobs)
+  - User profile image upload
+  - Input validation (Joi/Zod)
+  - Unit & integration testing (Jest/Supertest)
+  - Rate limiting & XSS prevention
+  - CI/CD pipelines
+  - Deployment setup (Railway, MongoDB Atlas)
+
+required_for_production:
+  code_quality:
+    - Use MVC architecture with clean service layers
+    - Modular folder structure
+    - Use async/await with centralized error handler
+  security:
+    - Helmet, CORS, Rate Limiter, XSS-Clean, mongo-sanitize
+    - Secure cookies (httpOnly, sameSite)
+    - Token refresh logic
+  devops:
+    - Setup `.env` with dotenv
+    - Environment separation: dev / prod
+    - Add CI/CD (GitHub Actions or Railway deploy hook)
+  testing:
+    - Unit tests for controllers, routes
+    - Integration tests for job application flow
+  user_experience:
+    - Error messages & success alerts on frontend
+    - Responsive UI (use Tailwind or Bootstrap)
+    - Optimized EJS templating or migrate to React
+  documentation:
+    - README with setup instructions, features
+    - Postman collection or Swagger for APIs
+  deployment:
+    backend: Railway or Render
+    frontend: Vercel or Netlify (if React)
+    database: MongoDB Atlas
+
