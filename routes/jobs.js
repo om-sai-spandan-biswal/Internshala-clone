@@ -9,7 +9,6 @@ router.get("/", async (req, res) => {
   res.render("browseJobs.ejs", { user : res.locals.user, jobs });
 });
 
-
 router.get("/manage", async (req,res) => {
   const id = res.locals.user["_id"]
   const jobs = await Job.find({company : id}) ;
@@ -19,7 +18,10 @@ router.get("/manage", async (req,res) => {
 router.get("/post", (req, res) => {
   res.render("postJob.ejs", { user : res.locals.user });
 });
-
+async (req, res) => {
+  const user = await res.locals.user.populate("profile");
+  res.render("profile.ejs", { user: user });
+}
 router.get("/:id",async (req,res) => {
   const id = req.params.id ;
   const job = await Job.findById(id) ;
@@ -48,6 +50,8 @@ router.delete("/:id", async(req,res) => {
     await Job.findByIdAndDelete(id) ;
     res.redirect("/jobs/manage")
 })
+
+
 
 // router.get("/:id", (req, res) => {
 //   const id = req.params.id;

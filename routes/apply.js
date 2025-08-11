@@ -2,11 +2,19 @@ const express = require("express") ;
 const Job = require("../models/job");
 const router = express.Router() ;
 const Application = require("../models/application");
+const req = require("express/lib/request");
 
 router.get("/view",async (req,res) => {
     const id = res.locals.user["_id"] ;
     const applications = await Application.find({applicant : id}).populate("job") ;
     res.render("applications.ejs",{applications}) 
+})
+
+router.post("/respond/:id",async (req,res) => {
+    const id = req.params.id ;
+    const {action} = req.body ;
+    const apply = await Application.findByIdAndUpdate(id, {status : action}) ;
+    res.redirect("/jobs/manage")   
 })
 
 router.get("/:id",async (req,res)=> {
@@ -31,11 +39,13 @@ router.post("/:id",async (req,res) => {
         status : "pending"
     }
 
-    const app = await Application.create(apply) ;
-    console.log(await (await app.populate("applicant")).populate("job")) ;
+    await Application.create(apply) ;
+
     res.redirect("/apply/view")
     
 })
+
+
 
 
 module.exports = router ;

@@ -3,14 +3,15 @@ const app = express();
 const path = require("path");
 const PORT = process.env.PORT || 5000;
 const mongoose = require("mongoose");
-const methodOverride = require('method-override') ;
+const methodOverride = require("method-override");
 const verifyLogin = require("./utils/userSignHandel");
-
+const expressError = require("./utils/expressError")
 const cookieParser = require("cookie-parser");
-app.use(methodOverride('_method'))
+app.use(methodOverride("_method"));
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
@@ -18,14 +19,12 @@ app.use(cookieParser());
 const authRoute = require("./routes/auth");
 const profileRoute = require("./routes/profile");
 const jobsRoute = require("./routes/jobs");
-const applyRoute = require("./routes/apply") ;
+const applyRoute = require("./routes/apply");
 
 app.use(verifyLogin, (req, res, next) => {
   res.locals.user = req.user || null;
   next();
 });
-
-
 
 app.get("/", (req, res) => {
   res.render("index.ejs", { user: res.locals.user });
@@ -34,7 +33,7 @@ app.get("/", (req, res) => {
 app.use("/", authRoute);
 app.use("/profile", profileRoute);
 app.use("/jobs", jobsRoute);
-app.use("/apply",applyRoute) ;
+app.use("/apply", applyRoute);
 
 app.get("/dashboard", (req, res) => {
   res.render("dashboard.ejs", { user: res.locals.user });
@@ -47,3 +46,15 @@ app.listen(PORT, () => {
     .catch((err) => console.error("Could not connect to MongoDB...", err));
   console.log(`Server is running on http://localhost:${PORT}`);
 });
+
+
+app.use((req,res,next) => {
+  next(new expressError(404,"Page NOT found")) ;
+})
+
+app.use((err,req,res,next) => {
+  const {status = 500,message = "Internal server error" } = err ;
+  res.status(status).json({message : message}) ;
+})
+
+

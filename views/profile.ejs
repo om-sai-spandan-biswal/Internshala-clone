@@ -5,7 +5,7 @@
     <h2>My Profile</h2>
 
     <% if (user.role === 'jobseeker') { %>
-      <img src="<%= user.image || '/images/default-profile.png' %>" class="profile-photo" alt="Profile Photo">
+      <img src="<%= user.profile.image || '/images/default-profile.png' %>" class="profile-photo" alt="Profile Photo">
       <p><strong>Name:</strong> <%= user.name %></p>
       <p><strong>Email:</strong> <%= user.email %></p>
       <p><strong>Bio:</strong> <%= user.profile.bio || 'N/A' %></p>
@@ -19,7 +19,7 @@
         <% } %>
       </p>
     <% } else if (user.role === 'recruiter') { %>
-      <img src="<%= user.images || '/images/default-company.png' %>" class="profile-photo" alt="Company Logo">
+      <img src="<%= user.profile.image || '/images/default-company.png' %>" class="profile-photo" alt="Company Logo">
       <p><strong>Email:</strong> <%= user.email %></p>
       <p><strong>Company:</strong> <%= user.profile.companyName || 'N/A' %></p>
       <p><strong>Website:</strong> 

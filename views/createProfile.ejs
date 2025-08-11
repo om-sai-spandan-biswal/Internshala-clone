@@ -1,7 +1,7 @@
 <%- include('partials/header') %>
 
 <main class="profile-form-container">
-  <form class="profile-form" action="/profile/link-user?_method=PATCH" method="POST" >
+  <form class="profile-form" enctype="multipart/form-data" action="/profile/link-user?_method=PATCH" method="POST" >
     <h2>Create Profile</h2>
 
     <% if (user.role === 'jobseeker') { %>

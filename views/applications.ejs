@@ -9,7 +9,7 @@
     <% applications.forEach(app => { %>
       <div class="job-card">
         <h3><%= app.job.title %> — <%= app.job.companyName %></h3>
-        <p><strong>Status:</strong> <%= app.status %></p>
+        <p class="<%= app.status == "accpected" ? "status-accepted" : app.status == "rejected" ? "status-rejected" : ""%>"> <strong>Status:</strong> <%= app.status %></p>
         <p><strong>Applied On:</strong> <%= app.appliedAt.toDateString() %></p>
         <a class="btn" href="/jobs/<%= app.job._id %>">View Job</a>
       </div>

@@ -7,11 +7,23 @@
     <p>No applicants yet.</p>
   <% } else { %>
     <% applicants.forEach(applicant => { %>
-      <div class="job-card">
+      <div class="job-card hover-zone">
         <h3><%= applicant.applicant.name %></h3>
         <p><strong>Email:</strong> <%= applicant.applicant.email %></p>
-        <a class="btn" href="<%= applicant.resumeLink %>" target="_blank">View Resume</a>
-        <a class="btn secondary" href="/profile/<%= applicant.applicant._id %>">View Profile</a>
+        <div style="margin: 10px 0;">
+          <a class="btn" href="<%= applicant.resume %>" target="_blank">View Resume</a>
+          <a class="btn secondary" href="/profile/<%= applicant.applicant._id %>">View Profile</a>
+        </div>
+
+        <div class="action-buttons">
+          <form method="POST" action="/apply/respond/<%= applicant._id %>" style="display: inline;">
+            <button type="submit" name="action" value="accpected" class="btn accept-btn">✅ Accept</button>
+          </form>
+
+          <form method="POST" action="/apply/respond/<%= applicant._id %>" style="display: inline; margin-left: 10px;">
+            <button type="submit" name="action" value="rejected" class="btn reject-btn">❌ Reject</button>
+          </form>
+        </div>
       </div>
     <% }) %>
   <% } %>

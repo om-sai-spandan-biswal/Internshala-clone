@@ -1,14 +1,46 @@
 <%- include('partials/header') %>
 
-<div class="job-list">
-  <h2 class="text-center">Available Jobs</h2>
-  <% jobs.forEach(job => { %>
-    <div class="job-card">
-      <h3><%= job.title %> @ <%= job.companyName %></h3>
-      <p><%= job.location %></p>
-      <a href="/jobs/<%= job._id %>" class="btn">View</a>
-    </div>
-  <% }) %>
+<link rel="stylesheet" href="/css/browseJobs.css">
+
+<div class="job-browse-container">
+  <h2>Browse Available Jobs</h2>
+
+  <button class="filter-toggle" onclick="toggleFilter()">Filter Jobs</button>
+
+  <!-- Filter Form -->
+  <form action="/jobs" method="GET" class="job-filter-form" id="filterForm">
+    <input type="text" name="location" placeholder="Location">
+    <select name="type">
+      <option value="">All Types</option>
+      <option value="fulltime">Full-Time</option>
+      <option value="parttime">Part-Time</option>
+      <option value="internship">Internship</option>
+    </select>
+    <input type="number" name="minSalary" placeholder="Min Salary">
+    <input type="number" name="maxSalary" placeholder="Max Salary">
+    <button type="submit">Apply Filter</button>
+  </form>
+
+  <% if (jobs.length === 0) { %>
+    <p>No jobs match your filter.</p>
+  <% } else { %>
+    <ul class="job-list">
+      <% jobs.forEach(job => { %>
+        <div class="job-card">
+          <h3><%= job.title %></h3>
+          <p><%= job.companyName %> &bullet; <%= job.type %> &bullet; <%= job.location %></p>
+          <a href="/jobs/<%= job._id %>" class="btn">View Details</a>
+        </div>
+      <% }) %>
+    </ul>
+  <% } %>
 </div>
+
+<script>
+  function toggleFilter() {
+    const form = document.getElementById('filterForm');
+    form.style.display = form.style.display === 'block' ? 'none' : 'block';
+  }
+</script>
 
 <%- include('partials/footer') %>

@@ -1,4 +1,5 @@
 const Profile = require("../models/profile") ;
+const upload = require("./uploads");
 
 module.exports = profileRole = async (req, res, next) => {
   const user = res.locals.user;
@@ -12,6 +13,7 @@ module.exports = profileRole = async (req, res, next) => {
     website,
     domains,
   } = req.body;
+  console.log(req.file)
 
   const role = user["role"];
 
